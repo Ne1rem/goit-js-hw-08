@@ -15,16 +15,21 @@ refs.formInput.addEventListener('input', throttle(saveInputValue, 500));
 
 function handleSubmit(event) {
   event.preventDefault();
-  event.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
-
+ if (refs.emailInput.value == "" || refs.message.value == "") {
+    alert(`Не всі рядки заповнені`);
+  } else {
+    event.currentTarget.reset();
+  }
   const feedback = {
     email: refs.emailInput.value,
     message: refs.message.value,
   };
-
+ 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(feedback));
+  
 }
+
 
 function saveInputValue(event) {
   const feedback = {
